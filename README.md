@@ -26,6 +26,9 @@ git branch branch-name
 git checkout branch-name
 
 
+推送分支到远程服务器（首次）
+git push --set-upstream origin dev
+
 查看当前状态
 git status
 
