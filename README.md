@@ -66,6 +66,7 @@ $ git config <key> # 显示指定配置项
 $ git config --list # 显示所有配置信息
 $ git config --list --show-origin # 显示配置信息及配置文件路径
 $ git config --global core.editor "path/to/editor" # 配置默认的编辑器
+$ git config --global core.editor notepad # 设置默认编辑器未notepad
 ```
 
 #### 创建仓库
