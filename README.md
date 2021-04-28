@@ -155,6 +155,7 @@ $ git push [remote] [branch] # 将代码推送到指定远程仓库的指定分�
 ```bash
 $ git branch # 查看工作区下的分支，并显示当前分支
 $ git branch -a # 显示所有本地分支和远程分支
+$ git branch -v # 显示分支的哈希码以及上次提交注释信息
 $ git branch <branchName> # 创建新的本地分支
 $ git branch -d <branchName> # 删除本地分支
 ```
