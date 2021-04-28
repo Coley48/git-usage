@@ -106,7 +106,7 @@ $ git diff <file> # 比较工作目录中当前文件和暂存区域快照之间
 $ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
 $ git commit # 提交代码到本地仓库，
 $ git commit -m "comments" # 提交代码并添加注释
-$ git commit -a
+$ git commit -a # 跳过 git add 添加到缓冲区操作，直接提交已跟踪的更改文件
 ```
 
 `git status -s/--short`命令显示的简略信息中，文件名前会显示两列标志，左栏指明了暂存区的状态，右栏指明了工作区的状态，?表示未跟踪，A表示新增，M表示修改过
