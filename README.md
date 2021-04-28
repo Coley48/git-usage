@@ -147,6 +147,7 @@ $ git fetch <remote> # 抓取指定远程仓库的代码，省略则抓取默认
 `git push`命令用于将本地仓库的代码推送到远程仓库。需要有写入权限，并且本地代码已经更新到和远程仓库同步。
 ```bash
 $ git push [remote] [branch] # 将代码推送到指定远程仓库的指定分支下，一般默认 origin 下的 master/main 主分支；
+$ git push [remote] HEAD:<branch> # 分离头模式中使用该命令指定推送的远程分支；
 ```
 
 #### 分支管理
@@ -163,7 +164,7 @@ $ git branch -d <branchName> # 删除本地分支
 `git checkout`命令用于切换分支，切换分支体现在.git/HEAD文件中的指向；
 ```bash
 $ git checkout # 显示工作区、暂存区和远程仓库之间的差异
-$ git checkout <branchName> # 切换分支
+$ git checkout [branchName | hashValue] # 切换到分支，可以切换到本地没有的分支，可以是历史提交的版本，或者远程分支，进入分离头模式（detached HEAD），在分离头模式中也可以创建新的分支；
 $ git checkout -b <branchName> # 创建并切换分支
 ```
 
@@ -197,7 +198,8 @@ $ git log -p/--patch # 补丁格式显示，显示更改内容；
 $ git log [-2] # 指定显示最后提交记录的条数；
 $ git log --stat # 显示提交记录的同时，显示每次提交的简略统计信息；
 $ git log --pretty=oneline # 指定显示格式，参数有 online | short | full | fuller，默认 full；
-$ git log --abbrev-commit # 只显示哈希码的前几位
+$ git log --abbrev-commit # 只显示哈希码的前几位，一般7位
+$ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 ```
 
 #### 获取帮助
