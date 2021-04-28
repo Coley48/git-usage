@@ -160,8 +160,9 @@ $ git branch <branchName> # 创建新的本地分支
 $ git branch -d <branchName> # 删除本地分支
 ```
 
-`git checkout`命令用于切换分支。
+`git checkout`命令用于切换分支，切换分支体现在.git/HEAD文件中的指向；
 ```bash
+$ git checkout # 显示工作区、暂存区和远程仓库之间的差异
 $ git checkout <branchName> # 切换分支
 $ git checkout -b <branchName> # 创建并切换分支
 ```
