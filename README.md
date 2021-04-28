@@ -84,16 +84,16 @@ $ git init # 在本地创建git仓库，将尚未进行版本控制的本地目�
 
 2. 从远程克隆
 
-`git clone`命令将从远程 git 服务器上将项目下载到本地，形成一个本地的克隆仓库，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。
+`git clone`命令将从远程 git 服务器上将项目下载到本地，形成一个本地的克隆仓库，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。命令会自动将其添加为远程仓库并默认以 “origin” 为简写。
 ```bash
 $ git clone https://github.com/User/Project.git # 使用http协议在当前文件夹下下载Project项目
 $ git clone git@github.com:User/Project.git # 使用git协议在当前文件夹下下载Project项目
 $ git clone https://github.com/User/Project.git newName # 下载Project项目到newName文件夹中，也可以跟路径，下载到指定位置
-$ git clone -b <branchName> https://github.com/User/Project.git # 下载项目指定分支
+$ git clone -b <branchName> https://github.com/User/Project.git # 下载项目指定分支，并且绑定获取和推送地址为该分支；
 # 下载链接后的 .git 可以不加；
 ```
 
-#### 修改与提交
+#### 修改提交
 
 `git status`命令用于查看项目中文件状态，待提交、已修改、未跟踪等。
 ```bash
@@ -120,6 +120,56 @@ $ git commit # 提交代码到本地仓库，默认使用 nano 编辑器，建�
 $ git commit -m "comments" # 提交代码并添加注释
 $ git commit -a # 跳过 git add 添加到缓冲区操作，直接提交已跟踪的更改文件
 $ git commit -am "comments" # 直接提交更改文件，同时添加注释
+$ git commit --amend # 重新提交，可以补充提交暂存区中的文件，也可以重写注释
+```
+
+`git mv`命令用于重命名已跟踪的文件。
+```bash
+$ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
+```
+
+#### 远程操作
+
+远程仓库是指托管在因特网或其他网络中的你的项目的版本库。
+`git remote`命令用于查看、配置远程信息。
+```bash
+$ git remote # 用于显示远程配置信息，列出你指定的每一个远程服务器的简写，克隆仓库会显示origin，这是默认远程仓库的名称\
+$ git remote -v # 显示需要读写远程仓库使用的 Git 保存的简写与其对应的 URL。
+$ git remote add <remoteName> <url> # 添加一个新的远程 Git 仓库，同时指定一个方便使用的简写
+$ git remote show <remoteName> # 显示指定远程仓库的信息
+```
+
+`git fetch`命令用于从远程仓库获取数据，该命令只会将数据下载到你的本地仓库——它并不会自动合并或修改你当前的工作，后续需要手动合并代码。
+```bash
+$ git fetch <remote> # 抓取指定远程仓库的代码，省略则抓取默认的 origin 远程仓库
+```
+
+`git push`命令用于将本地仓库的代码推送到远程仓库。需要有写入权限，并且本地代码已经更新到和远程仓库同步。
+```bash
+$ git push [remote] [branch] # 将代码推送到指定远程仓库的指定分支下，一般默认 origin 下的 master/main 主分支；
+```
+
+#### 分支管理
+
+`git branch`命令用于查看、创建分支等操作。
+```bash
+$ git branch # 查看工作区下的分支，并显示当前分支
+$ git branch -a # 显示所有本地分支和远程分支
+$ git branch <branchName> # 创建新的本地分支
+$ git branch -d <branchName> # 删除本地分支
+```
+
+`git checkout`命令用于切换分支。
+```bash
+$ git checkout <branchName> # 切换分支
+$ git checkout -b <branchName> # 创建并切换分支
+```
+
+#### 撤销删除
+
+`git reset`用于撤销操作。
+```bash
+$ git reset HEAD <file> # 用于从暂存区取消暂存文件
 ```
 
 `git rm`命令用于删除 git 项目中的文件。
@@ -127,13 +177,13 @@ $ git commit -am "comments" # 直接提交更改文件，同时添加注释
 $ git rm <file> # 从暂存区中删除文件，同时永久删除文件，不能删除未提交到仓库中的文件
 $ git rm --cached <file> # 只从缓冲区中删除文件，取消跟踪
 $ git rm -f <file> # 强制删除文件，包括未提交到仓库中的文件
-$ git rm -r --cached . # 删除本地缓存，有时更新.gitignore文件不会立即生效，可以执行该命令
 $ git rm -rf . # 强制移除项目中所有文件
+$ git rm -r --cached . # 删除本地缓存，有时更新.gitignore文件不会立即生效，可以执行该命令
 ```
 
-`git mv`命令用于重命名已跟踪的文件。
+`git restore`命令用于丢弃更改。
 ```bash
-$ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
+$ git restore <file> # 忽略该文件的更改，退回到上次提交时的状态
 ```
 
 #### 提交历史
