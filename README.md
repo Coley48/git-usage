@@ -147,7 +147,14 @@ $ git fetch <remote> # 抓取指定远程仓库的代码，省略则抓取默认
 `git push`命令用于将本地仓库的代码推送到远程仓库。需要有写入权限，并且本地代码已经更新到和远程仓库同步。
 ```bash
 $ git push [remote] [branch] # 将代码推送到指定远程仓库的指定分支下，一般默认 origin 下的 master/main 主分支；
-$ git push [remote] HEAD:<branch> # 分离头模式中使用该命令指定推送的远程分支；
+$ git push [remote] HEAD:<branch> # 使用该命令推送到指定的远程分支；
+$ git push --set-upstream origin <newBranch> # 将本地分支推送到远程服务器，并创建对应的分支 
+```
+
+`git pull`操作用于从服务器拉取更新代码，并自动合并到本地。
+```bash
+$ git pull # 相当于 git fetch + git merge 结合的操作
+$ git pull [remote] [branch] # 下载指定分支代码，并快速合并
 ```
 
 #### 分支管理
