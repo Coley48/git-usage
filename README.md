@@ -2,22 +2,17 @@
 
 该项目用于记录 git 学习笔记，同时也用于测试 git 各种命令等。
 
-### progit 学习笔记
-
-- [在线文档](https://git-scm.com/book/zh/v2)
-- [PDF电子书](https://github.com/progit/progit2-zh/releases/download/2.1.55/progit_v2.1.55.pdf)
-
 ### 关于版本控制
 
 > 版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 在本书所展示的例子中，我们对保存着软件源代码的文件作版本控制，但实际上，你可以对任何类型的文件进行版本控制。
 
-git 是基于差异（delta-based）的版本控制工具；
+> git 是基于差异（delta-based）的版本控制工具；
 
-在 Git中，每当你提交更新或保存项目状态时，它基本上就会对当时的全部文件创建一个快照并保存这个快照的索引。为了效率，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。
+> 在 Git中，每当你提交更新或保存项目状态时，它基本上就会对当时的全部文件创建一个快照并保存这个快照的索引。为了效率，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。
 
-git 会为每个版本都创建一个快照。
+> git 会为每个版本都创建一个快照。
 
-### git 工作方式
+### Git 工作方式
 
 基本的 Git 工作流程如下：
 1. 在工作区中修改文件。
@@ -35,9 +30,15 @@ git 会为每个版本都创建一个快照。
 - 暂存区是一个文件，保存了下次将要提交的文件列表信息，一般在 Git 仓库目录中。 按照 Git 的术语叫做“索引”，不过一般说法还是叫“暂存区”。
 - Git仓库是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，复制的就是这里的数据。
 
+Git 工作三个阶段:
+
 ![git工作三个阶段](./image/git三个阶段.png)
 
-### 安装 git
+Git 文件状态变更:
+
+![Git 文件状态变更](./image/git文件状态变更.png)
+
+### Git 安装
 
 Windows 上安装：
 
@@ -47,7 +48,7 @@ Windows 上安装：
 
 [Linux、Mac 安装](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)
 
-### 使用 git
+### Git 使用
 
 
 #### 配置信息
@@ -128,6 +129,8 @@ $ git commit --amend # 重新提交，可以补充提交暂存区中的文件，
 $ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
 ```
 
+`git merge`命令用于合并分支，待补充。
+
 #### 远程操作
 
 远程仓库是指托管在因特网或其他网络中的你的项目的版本库。
@@ -149,6 +152,7 @@ $ git fetch <remote> # 抓取指定远程仓库的代码，省略则抓取默认
 $ git push [remote] [branch] # 将代码推送到指定远程仓库的指定分支下，一般默认 origin 下的 master/main 主分支；
 $ git push [remote] HEAD:<branch> # 使用该命令推送到指定的远程分支；
 $ git push --set-upstream origin <newBranch> # 将本地分支推送到远程服务器，并创建对应的分支 
+$ git push origin --delete <BranchName> # 删除远程分支
 ```
 
 `git pull`操作用于从服务器拉取更新代码，并自动合并到本地。
@@ -173,6 +177,7 @@ $ git branch -d <branchName> # 删除本地分支
 $ git checkout # 显示工作区、暂存区和远程仓库之间的差异
 $ git checkout [branchName | hashValue] # 切换到分支，可以切换到本地没有的分支，可以是历史提交的版本，或者远程分支，进入分离头模式（detached HEAD），在分离头模式中也可以创建新的分支；
 $ git checkout -b <branchName> # 创建并切换分支
+$ git checkout --orphan <branch-name> # 创建单独分支
 ```
 
 #### 撤销删除
@@ -209,6 +214,10 @@ $ git log --abbrev-commit # 只显示哈希码的前几位，一般7位
 $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 ```
 
+#### 标签管理
+
+`git tag`命令用于为不同版本提交设置标签，待补充。
+
 #### 获取帮助
 
 以下命令可以查看 git 指令的描述，以及详细用法；打开的是本地的英文网页文档；
@@ -238,56 +247,10 @@ $ git <action> -h # 命令缩写
 - 使用两个星号（\*\*）表示匹配任意中间目录；
 
 
-
-
-
-创建单独分支
-git checkout --orphan <branch-name>
-
-
-查看所有分支，包括远程分支
-git branch -a
-
-删除远程分支
-git push origin --delete <branch-name>
-
-
-! [rejected] gh-pages -> gh-pages (non-fast-forward)
-git push --set-upstream origin gh-pages
-
-
-#### 推送分支到远程服务器 `git push --set-upstream origin <BranchName>`
-
-```bash
-Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
-remote:
-remote: Create a pull request for 'secondary' on GitHub by visiting:
-remote:      https://github.com/Coley48/git-test/pull/new/secondary
-remote:
-To https://github.com/Coley48/git-test
- * [new branch]      secondary -> secondary
-Branch 'secondary' set up to track remote branch 'secondary' from 'origin'.
-```
-
-#### 删除分支  `git branch -d <BranchName>`
-
-```
-Deleted branch test (was 12876d8).
-```
-
-#### 删除远程分支 `git push origin --delete <BranchName>`
-
-```
-To https://github.com/Coley48/git-test
- - [deleted]         secondary
- ```
-
-### git 可视化工具
-
-#### github desktop
-
-#### git gui
-
 ### 参考资料
 
-[git 官网](https://git-scm.com/)
+- [git 官网](https://git-scm.com/)
+- [在线文档](https://git-scm.com/book/zh/v2)
+- [PDF电子书](https://github.com/progit/progit2-zh/releases/download/2.1.55/progit_v2.1.55.pdf)
+- [git 命令大全](https://www.jianshu.com/p/46ffff059092)
+- [git 奇淫技巧](https://github.com/521xueweihan/git-tips)
