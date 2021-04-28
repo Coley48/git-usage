@@ -50,7 +50,7 @@ Windows 上安装：
 ### 使用 git
 
 
-#### 配置 git
+#### 配置信息
 
 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址。 这一点很重要，因为每一个 Git 提交都会使用这些信息，它们会写入到你的每一次提交中，不可更改。该配置项会被写入用户文件夹下的.gitconfig 文件中。
 
@@ -71,19 +71,20 @@ $ git config --global core.editor notepad # 设置默认编辑器未notepad
 
 #### 创建仓库
 
-创建仓库一般分为两种方式
+git 创建仓库一般分为两种方式：
 
 1. 在本地创建
+
+`git init`命令将创建一个名为 .git 的子目录（隐藏文件夹），这个子目录包括初始化的 Git 仓库中所有的必须文件，这些文件是 Git 仓库的骨干。
 
 ```bash
 $ cd /path/to/myProject # 进入到项目文件夹下
 $ git init # 在本地创建git仓库，将尚未进行版本控制的本地目录转换为 Git 仓库；
 ```
 
-`git init`命令将创建一个名为 .git 的子目录（隐藏文件夹），这个子目录包括初始化的 Git 仓库中所有的必须文件，这些文件是Git 仓库的骨干。
-
 2. 从远程克隆
 
+`git clone`命令将从远程 git 服务器上将项目下载到本地，形成一个本地的克隆仓库，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。
 ```bash
 $ git clone https://github.com/User/Project.git # 使用http协议在当前文件夹下下载Project项目
 $ git clone git@github.com:User/Project.git # 使用git协议在当前文件夹下下载Project项目
@@ -92,31 +93,64 @@ $ git clone -b <branchName> https://github.com/User/Project.git # 下载项目�
 # 下载链接后的 .git 可以不加；
 ```
 
-当执行`git clone`命令的时候，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。
+#### 修改与提交
 
-#### git 修改与提交
-
+`git status`命令用于查看项目中文件状态，待提交、已修改、未跟踪等。
 ```bash
 $ git status # 查看文件状态
-$ git status -s/--short # 查看文件状态的简略信息
+$ git status -s/--short # 查看文件状态的简略信息，其中文件名前会显示两列标志，左栏表示暂存区的状态，右栏表示工作区的状态，?表示未跟踪，A表示新增，M表示修改过
+```
+
+`git add`命令用于添加文件到缓冲区并跟踪文件，即监视文件变动。
+```bash
 $ git add <file> # 添加跟踪文件到暂存区
 $ git add *.c # 添加所有.c文件
 $ git add . # 添加所有文件
-$ git diff <file> # 比较工作目录中当前文件和暂存区域快照之间的差异；
-$ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
-$ git commit # 提交代码到本地仓库，
-$ git commit -m "comments" # 提交代码并添加注释
-$ git commit -a # 跳过 git add 添加到缓冲区操作，直接提交已跟踪的更改文件
 ```
 
-`git status -s/--short`命令显示的简略信息中，文件名前会显示两列标志，左栏指明了暂存区的状态，右栏指明了工作区的状态，?表示未跟踪，A表示新增，M表示修改过
+`git diff`命令用于查看文件更改前后之间的差异。
+```bash
+$ git diff <file> # 比较工作目录中当前文件和暂存区域快照之间的差异；
+$ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
+```
 
-#### git 
+`git commit`命令用于将缓冲区中的文件提交到本地仓库。
+```bash
+$ git commit # 提交代码到本地仓库，默认使用 nano 编辑器，建议更改默认编辑器
+$ git commit -m "comments" # 提交代码并添加注释
+$ git commit -a # 跳过 git add 添加到缓冲区操作，直接提交已跟踪的更改文件
+$ git commit -am "comments" # 直接提交更改文件，同时添加注释
+```
+
+`git rm`命令用于删除 git 项目中的文件。
+```bash
+$ git rm <file> # 从暂存区中删除文件，同时永久删除文件，不能删除未提交到仓库中的文件
+$ git rm --cached <file> # 只从缓冲区中删除文件，取消跟踪
+$ git rm -f <file> # 强制删除文件，包括未提交到仓库中的文件
+$ git rm -r --cached . # 删除本地缓存，有时更新.gitignore文件不会立即生效，可以执行该命令
+$ git rm -rf . # 强制移除项目中所有文件
+```
+
+`git mv`命令用于重命名已跟踪的文件。
+```bash
+$ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
+```
+
+#### 提交历史
+
+`git log`命令用于查看提交历史。
+```bash
+$ git log # 查看提交历史，包括哈希值、作者、日期、注释等信息；
+$ git log -p/--patch # 补丁格式显示，显示更改内容；
+$ git log [-2] # 指定显示最后提交记录的条数；
+$ git log --stat # 显示提交记录的同时，显示每次提交的简略统计信息；
+$ git log --pretty=oneline # 指定显示格式，参数有 online | short | full | fuller，默认 full；
+$ git log --abbrev-commit # 只显示哈希码的前几位
+```
 
 #### 获取帮助
 
-查看命令的解释，以及详细用法；打开的是本地的英文网页文档；
-
+以下命令可以查看 git 指令的描述，以及详细用法；打开的是本地的英文网页文档；
 ```bash
 $ git help <action>
 $ git <action> --help
@@ -143,14 +177,12 @@ $ git <action> -h # 命令缩写
 - 使用两个星号（\*\*）表示匹配任意中间目录；
 
 
-更新.gitignore文件
-git rm -r --cached .
+
+
 
 创建单独分支
 git checkout --orphan <branch-name>
 
-移除所有文件
-git rm -rf .
 
 查看所有分支，包括远程分支
 git branch -a
