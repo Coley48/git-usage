@@ -89,26 +89,12 @@ $ git clone -b <branchName> https://github.com/User/Project.git # 下载项目�
 
 #### 修改提交
 
-`git status`命令用于查看项目中文件状态，待提交、已修改、未跟踪等。
-
-```bash
-$ git status # 查看文件状态
-$ git status -s/--short # 查看文件状态的简略信息，其中文件名前会显示两列标志，左栏表示暂存区的状态，右栏表示工作区的状态，?表示未跟踪，A表示新增，M表示修改过
-```
-
 `git add`命令用于添加文件到缓冲区并跟踪文件，即监视文件变动。
 
 ```bash
 $ git add <file> # 添加跟踪文件到暂存区
 $ git add *.c # 添加所有.c文件
 $ git add . # 添加所有文件
-```
-
-`git diff`命令用于查看文件更改前后之间的差异。
-
-```bash
-$ git diff <file> # 比较工作目录中当前文件和暂存区域快照之间的差异；
-$ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
 ```
 
 `git commit`命令用于将缓冲区中的文件提交到本地仓库。
@@ -208,7 +194,31 @@ $ git rm -r --cached . # 删除本地缓存，有时更新.gitignore文件不会
 $ git restore <file> # 忽略该文件的更改，退回到上次提交时的状态
 ```
 
-#### 提交历史
+#### 标签管理
+
+`git tag`命令用于为不同版本代码提交设置标签。Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。轻量标签，附注标签会包含作者、邮箱、日期等信息。
+
+```bash
+$ git tag # 显示标签，以字母顺序列出
+$ git tag -a <version> # 添加附注标签，并使用编辑器添加描述信息
+$ git tag -a <version> -m "comments" # 添加附注标签同时添加描述信息
+```
+
+#### 信息显示
+
+`git status`命令用于查看项目中文件状态，待提交、已修改、未跟踪等。
+
+```bash
+$ git status # 查看文件状态
+$ git status -s/--short # 查看文件状态的简略信息，其中文件名前会显示两列标志，左栏表示暂存区的状态，右栏表示工作区的状态，?表示未跟踪，A表示新增，M表示修改过
+```
+
+`git diff`命令用于查看文件更改前后之间的差异。
+
+```bash
+$ git diff <file> # 比较工作目录中当前文件和暂存区域快照之间的差异；
+$ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
+```
 
 `git log`命令用于查看提交历史。
 
@@ -222,22 +232,17 @@ $ git log --abbrev-commit # 只显示哈希码的前几位，一般7位
 $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 ```
 
-#### 标签管理
-
-`git tag`命令用于为不同版本代码提交设置标签。Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。轻量标签，附注标签会包含作者、邮箱、日期等信息。
-
+`git show`命令用于显示提交、分支、标签等详细信息。
 ```bash
-$ git tag # 显示标签，以字母顺序列出
-$ git tag -a # 添加附注标签，并使用编辑器添加描述信息
+$ git show # 显示上一次提交记录
+$ git show  <hash | branch | tag> # 显示该分支最后一次提交记录、作者、时间、文件差异等信息；
 ```
 
-#### 获取帮助
-
-以下命令可以查看 Git 指令的描述，以及详细用法；打开的是本地的英文网页文档；
+`git help`命令可以查看 Git 指令的描述，以及详细用法；打开的是本地的英文文档网页文件，通常位于 Git 安装目录下的`Git/mingw64/share/doc/git-doc/`
 
 ```bash
-$ git help <action>
-$ git <action> --help
+$ git help <action> # 用浏览器打开该命令的详细说明页面
+$ git <action> --help # 在指令后添加 --help/-h 选项效果同 git help
 $ git <action> -h # 命令缩写
 ```
 
