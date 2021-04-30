@@ -196,7 +196,7 @@ $ git restore <file> # 忽略该文件的更改，退回到上次提交时的状
 
 #### 标签管理
 
-`git tag`命令用于为不同版本代码提交设置标签。Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。轻量标签，附注标签会包含作者、邮箱、日期等信息。
+`git tag`命令用于为版本提交设置标签。Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。轻量标签，附注标签会包含作者、邮箱、日期等信息。
 
 ```bash
 $ git tag # 显示标签，以字母顺序列出
@@ -242,8 +242,7 @@ $ git show  <hash | branch | tag> # 显示该分支最后一次提交记录、�
 
 ```bash
 $ git help <action> # 用浏览器打开该命令的详细说明页面
-$ git <action> --help # 在指令后添加 --help/-h 选项效果同 git help
-$ git <action> -h # 命令缩写
+$ git <action> --help # 在指令后添加 --help 选项效果同 git help
 ```
 
 #### 忽略文件
