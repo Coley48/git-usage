@@ -46,6 +46,12 @@ Windows 上安装：
 
 [Linux、Mac 安装](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)
 
+安装完成后使用`git --version`查看是否安装成功：
+```bash
+$ git --version # 输出当前 Git 版本信息
+git version 2.29.2.windows.2
+```
+
 ### Git 使用
 
 #### 配置信息
@@ -113,7 +119,7 @@ $ git commit --amend # 重新提交，可以补充提交暂存区中的文件，
 $ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
 ```
 
-`git merge`命令用于合并分支，待补充。
+`git merge`命令用于合并分支，该命令也会算入一次提交记录。待补充。
 
 #### 远程操作
 
@@ -156,7 +162,7 @@ $ git pull [remote] [branch] # 下载指定分支代码，并快速合并
 ```bash
 $ git branch # 查看工作区下的分支，并显示当前分支
 $ git branch -a # 显示所有本地分支和远程分支
-$ git branch -v # 显示分支的哈希码以及上次提交注释信息
+$ git branch -v # 显示分支的检验和以及上次提交注释信息
 $ git branch <branchName> # 创建新的本地分支
 $ git branch -d <branchName> # 删除本地分支
 ```
@@ -196,12 +202,16 @@ $ git restore <file> # 忽略该文件的更改，退回到上次提交时的状
 
 #### 标签管理
 
-`git tag`命令用于为版本提交设置标签。Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。轻量标签，附注标签会包含作者、邮箱、日期等信息。
+`git tag`命令用于为版本提交设置标签。Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。附注标签会包含作者、邮箱、日期等信息，轻量标签则没有保存任何其他信息。默认情况下，git push 命令并不会传送标签到远程仓库服务器上。 在创建完标签后你必须显式地推送标签到共享服务器上。
 
 ```bash
 $ git tag # 显示标签，以字母顺序列出
-$ git tag -a <version> # 添加附注标签，并使用编辑器添加描述信息
-$ git tag -a <version> -m "comments" # 添加附注标签同时添加描述信息
+$ git tag <tagname> # 添加轻量标签；
+$ git tag <tagname> <hash> # 通过提交检验和加标签； 
+$ git tag -a <tagname> # 添加附注标签，并使用编辑器添加描述信息
+$ git tag -a <tagname> -m "comments" # 添加附注标签同时添加描述信息
+$ git push origin <taganme> # 上传标签到远程仓库
+$ git push origin --tags # 上传所有标签到远程仓库
 ```
 
 #### 信息显示
@@ -223,19 +233,20 @@ $ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
 `git log`命令用于查看提交历史。
 
 ```bash
-$ git log # 查看提交历史，包括哈希值、作者、日期、注释等信息；
+$ git log # 查看提交历史，包括检验和、作者、日期、注释等信息；
 $ git log -p/--patch # 补丁格式显示，显示更改内容；
 $ git log [-2] # 指定显示最后提交记录的条数；
 $ git log --stat # 显示提交记录的同时，显示每次提交的简略统计信息；
 $ git log --pretty=oneline # 指定显示格式，参数有 online | short | full | fuller，默认 full；
-$ git log --abbrev-commit # 只显示哈希码的前几位，一般7位
+$ git log --abbrev-commit # 只显示检验和的前几位，一般7位
 $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 ```
 
 `git show`命令用于显示提交、分支、标签等详细信息。
 ```bash
 $ git show # 显示上一次提交记录
-$ git show  <hash | branch | tag> # 显示该分支最后一次提交记录、作者、时间、文件差异等信息；
+$ git show  <hash | branch> # 显示该分支最后一次提交记录、作者、时间、文件差异等信息；
+$ git show <tag> # 显示标签信息和提交信息；
 ```
 
 `git help`命令可以查看 Git 指令的描述，以及详细用法；打开的是本地的英文文档网页文件，通常位于 Git 安装目录下的`Git/mingw64/share/doc/git-doc/`
