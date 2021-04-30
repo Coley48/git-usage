@@ -216,7 +216,12 @@ $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 
 #### 标签管理
 
-`git tag`命令用于为不同版本提交设置标签，待补充。
+`git tag`命令用于为不同版本代码提交设置标签。Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。轻量标签，附注标签会包含作者、邮箱、日期等信息。
+
+```bash
+$ git tag # 显示标签，以字母顺序列出
+$ git tag -a # 添加附注标签，并使用编辑器添加描述信息
+```
 
 #### 获取帮助
 
