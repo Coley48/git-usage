@@ -240,6 +240,7 @@ $ git log --stat # 显示提交记录的同时，显示每次提交的简略统�
 $ git log --pretty=oneline # 指定显示格式，参数有 online | short | full | fuller，默认 full；
 $ git log --abbrev-commit # 只显示检验和的前几位，一般7位
 $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
+$ git log --oneline --decorate --graph --all # 显示提交历史、各个分支的指向以及项目的分支分叉情况
 ```
 
 `git show`命令用于显示提交、分支、标签等详细信息。
