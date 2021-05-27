@@ -83,7 +83,7 @@ $ git init # 在本地创建 Git 仓库，将尚未进行版本控制的本地�
 
 2. 从远程克隆
 
-`git clone`命令将从远程 Git 服务器上将项目下载到本地，形成一个本地的克隆仓库，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。命令会自动将其添加为远程仓库并默认以 “origin” 为简写。
+`git clone`命令将从远程 Git 服务器上将项目下载到本地，形成一个本地的克隆仓库，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。命令会自动将其添加为远程仓库并默认以 “origin” 为简写，克隆方式（git/https）也会绑定成为上传方式。
 
 ```bash
 $ git clone https://github.com/User/Project.git # 使用http协议在当前文件夹下下载Project项目
@@ -120,7 +120,7 @@ $ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
 ```
 
 `git merge`命令用于合并分支，该命令会形成一次合并提交。待补充。
-合并策列：
+合并策略：fast-forward | recursive
 fast-forward：当主分支是开发分支的直接祖先时，只移动master指针到开发分支，实现合并；
 recursive：当主分支与开发分支没有直接共同祖先时，会对共同祖先分支、主分支以及开发分支进行三方合并；
 
@@ -134,6 +134,8 @@ $ git remote # 用于显示远程配置信息，列出你指定的每一个远�
 $ git remote -v # 显示需要读写远程仓库使用的 Git 保存的简写与其对应的 URL。
 $ git remote add <remoteName> <url> # 添加一个新的远程 Git 仓库，同时指定一个方便使用的简写
 $ git remote show <remoteName> # 显示指定远程仓库的信息
+$ git remote set-url origin git@github.com:user/repo # 设置仓库上传地址，使用 git 协议，该设置存储在 .git/config 文件中
+$ git remote set-url origin https://github.com/user/repo # 设置仓库上传代码地址，使用 https 协议
 ```
 
 `git fetch`命令用于从远程仓库获取数据，该命令只会将数据下载到你的本地仓库——它并不会自动合并或修改你当前的工作，后续需要手动合并代码。
@@ -184,7 +186,14 @@ $ git checkout --orphan <branch-name> # 创建单独分支
 `git reset`用于撤销操作。
 
 ```bash
-$ git reset HEAD <file> # 用于从暂存区取消暂存文件
+$ git reset HEAD <file> # 从暂存区取消指定暂存文件
+$ git reset HEAD . # 从暂存区中取消所有暂存文件
+$ git reset <file> # 从暂存区取消指定暂存文件
+$ git reset -- <file> # 从暂存区取消指定暂存文件
+$ git reset --hard <hash> # 撤销回退到某次提交状态，并删除代码，慎用
+$ git reset --hard HEAD~1 # 撤销之前的几次提交，并删除代码，慎用
+$ git reset --soft <hash> # 撤销回退到某次提交状态，不删除代码
+$ git reset --soft HEAD~1 # 撤销之前的几次提交，不删除代码
 ```
 
 `git rm`命令用于删除 Git 项目中的文件。
@@ -288,3 +297,7 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - [progit PDF电子书](https://github.com/progit/progit2-zh/releases/download/2.1.55/progit_v2.1.55.pdf)
 - [Git 命令大全](https://www.jianshu.com/p/46ffff059092)
 - [Git 奇淫技巧](https://github.com/521xueweihan/git-tips)
+- [git-ssh 配置和使用](https://segmentfault.com/a/1190000002645623)
+- [Github两种上传方式——SSH/https](https://blog.csdn.net/nbaDWde/article/details/80360836)
+- [Git 撤销commit文件 和 回退push的文件](https://www.jianshu.com/p/491a14d414f6)
+- [git使用情景2：commit之后，想撤销commit](https://blog.csdn.net/w958796636/article/details/53611133)
