@@ -248,7 +248,7 @@ $ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
 ```bash
 $ git log # 查看提交历史，包括检验和、作者、日期、注释等信息；
 $ git log -p/--patch # 补丁格式显示，显示更改内容；
-$ git log [-2] # 指定显示最后提交记录的条数；
+$ git log -n # 指定显示最后提交记录的条数；
 $ git log --stat # 显示提交记录的同时，显示每次提交的简略统计信息；
 $ git log --pretty=oneline # 指定显示格式，参数有 online | short | full | fuller，默认 full；
 $ git log --abbrev-commit # 只显示检验和的前几位，一般7位
@@ -256,7 +256,15 @@ $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 $ git log --oneline --decorate --graph --all # 显示提交历史、各个分支的指向以及项目的分支分叉情况
 ```
 
+`git reflog`命令用于显示所有本地操作的历史记录。可用于恢复因误操作被删除的分支。
+
+```bash
+$ git reflog # 显示从仓库创建之后的所有操作
+$ git reflog -n # 指定显示的条数
+```
+
 `git show`命令用于显示提交、分支、标签等详细信息。
+
 ```bash
 $ git show # 显示上一次提交记录
 $ git show  <hash | branch> # 显示该分支最后一次提交记录、作者、时间、文件差异等信息；
@@ -302,3 +310,4 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - [Github两种上传方式——SSH/https](https://blog.csdn.net/nbaDWde/article/details/80360836)
 - [Git 撤销commit文件 和 回退push的文件](https://www.jianshu.com/p/491a14d414f6)
 - [git使用情景2：commit之后，想撤销commit](https://blog.csdn.net/w958796636/article/details/53611133)
+- [git reflog 后悔药操作](https://blog.csdn.net/Della0930/article/details/89487914)
