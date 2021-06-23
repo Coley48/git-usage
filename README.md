@@ -192,9 +192,9 @@ $ git reset HEAD . # 从暂存区中取消所有暂存文件
 $ git reset <file> # 从暂存区取消指定暂存文件
 $ git reset -- <file> # 从暂存区取消指定暂存文件
 $ git reset --hard <hash> # 撤销回退到某次提交状态，并删除代码，慎用
-$ git reset --hard HEAD~1 # 撤销之前的几次提交，并删除代码，慎用
+$ git reset --hard HEAD~n # 撤销之前的几次提交，并删除代码，HEAD~1 等价于 HEAD^，慎用
 $ git reset --soft <hash> # 撤销回退到某次提交状态，不删除代码
-$ git reset --soft HEAD~1 # 撤销之前的几次提交，不删除代码
+$ git reset --soft HEAD~n # 撤销之前的几次提交，不删除代码
 ```
 
 `git rm`命令用于删除 Git 项目中的文件。
