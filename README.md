@@ -119,10 +119,19 @@ $ git commit --amend # 重新提交，可以补充提交暂存区中的文件，
 $ git mv <fileA> <fileB> # 将文件 fileA 重命名为 fileB
 ```
 
-`git merge`命令用于合并分支，该命令会形成一次合并提交。待补充。
-合并策略：fast-forward | recursive
-fast-forward：当主分支是开发分支的直接祖先时，只移动master指针到开发分支，实现合并；
-recursive：当主分支与开发分支没有直接共同祖先时，会对共同祖先分支、主分支以及开发分支进行三方合并；
+`git merge`命令用于合并分支，该命令会形成一次合并提交。
+
+```bash
+$ git merge <hash | branchName> # 合并某次提交或两个分支
+```
+
+`git cherry-pick`命令用于移植某些提交的变更。
+
+```bash
+$ git cherry-pick <hash | branchName> # 将某次提交的变动转移到当前分支下
+$ git cherry-pick --continue # 当移植过程中出现冲突时，需先解决冲突，然后执行该命令完成移植
+$ git cherry-pick --abort # 放弃移植操作，回到操作前的状态
+```
 
 #### 远程操作
 
@@ -311,3 +320,4 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - [Git 撤销commit文件 和 回退push的文件](https://www.jianshu.com/p/491a14d414f6)
 - [git使用情景2：commit之后，想撤销commit](https://blog.csdn.net/w958796636/article/details/53611133)
 - [git reflog 后悔药操作](https://blog.csdn.net/Della0930/article/details/89487914)
+- [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
