@@ -116,7 +116,7 @@ $ git commit --amend # 重新提交，可以补充提交暂存区中的文件，
 `git mv`命令用于重命名已跟踪的文件。
 
 ```bash
-$ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
+$ git mv <fileA> <fileB> # 将文件 fileA 重命名为 fileB
 ```
 
 `git merge`命令用于合并分支，该命令会形成一次合并提交。待补充。
@@ -167,12 +167,13 @@ $ git pull [remote] [branch] # 下载指定分支代码，并快速合并
 ```bash
 $ git branch # 查看工作区下的分支，并显示当前分支
 $ git branch -a # 显示所有本地分支和远程分支
+$ git branch -r # 显示远程分支
 $ git branch -v # 显示分支的检验和以及上次提交注释信息
 $ git branch <branchName> # 创建新的本地分支
 $ git branch -d <branchName> # 删除本地分支
 ```
 
-`git checkout`命令用于切换分支，切换分支体现在.git/HEAD文件中的指向；
+`git checkout`命令用于切换分支，切换分支体现在 .git/HEAD 文件中的指向；
 
 ```bash
 $ git checkout # 显示工作区、暂存区和远程仓库之间的差异
