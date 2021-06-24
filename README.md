@@ -136,6 +136,7 @@ $ git remote add <remoteName> <url> # 添加一个新的远程 Git 仓库，同�
 $ git remote show <remoteName> # 显示指定远程仓库的信息
 $ git remote set-url origin git@github.com:user/repo # 设置仓库上传地址，使用 git 协议，该设置存储在 .git/config 文件中
 $ git remote set-url origin https://github.com/user/repo # 设置仓库上传代码地址，使用 https 协议
+$ git remote add origin git@github.com:Coley48/webpack-code.git # 将本地仓库关联远程仓库
 ```
 
 `git fetch`命令用于从远程仓库获取数据，该命令只会将数据下载到你的本地仓库——它并不会自动合并或修改你当前的工作，后续需要手动合并代码。
@@ -151,6 +152,7 @@ $ git push [remote] [branch] # 将代码推送到指定远程仓库的指定分�
 $ git push [remote] HEAD:<branch> # 使用该命令推送到指定的远程分支；
 $ git push --set-upstream origin <newBranch> # 将本地分支推送到远程服务器，并创建对应的分支 
 $ git push origin --delete <BranchName> # 删除远程分支
+$ git push origin <BranchName> --force # 强制推送到远程，覆盖之前的提交版本
 ```
 
 `git pull`操作用于从服务器拉取更新代码，并自动合并到本地。
