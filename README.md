@@ -116,13 +116,22 @@ $ git commit --amend # 重新提交，可以补充提交暂存区中的文件，
 `git mv`命令用于重命名已跟踪的文件。
 
 ```bash
-$ git rm <fileA> <fileB> # 将文件fileA重命名为fileB
+$ git mv <fileA> <fileB> # 将文件 fileA 重命名为 fileB
 ```
 
-`git merge`命令用于合并分支，该命令会形成一次合并提交。待补充。
-合并策略：fast-forward | recursive
-fast-forward：当主分支是开发分支的直接祖先时，只移动master指针到开发分支，实现合并；
-recursive：当主分支与开发分支没有直接共同祖先时，会对共同祖先分支、主分支以及开发分支进行三方合并；
+`git merge`命令用于合并分支，该命令会形成一次合并提交。
+
+```bash
+$ git merge <hash | branchName> # 合并某次提交或两个分支
+```
+
+`git cherry-pick`命令用于移植某些提交的变更。
+
+```bash
+$ git cherry-pick <hash | branchName> # 将某次提交的变动转移到当前分支下
+$ git cherry-pick --continue # 当移植过程中出现冲突时，需先解决冲突，然后执行该命令完成移植
+$ git cherry-pick --abort # 放弃移植操作，回到操作前的状态
+```
 
 #### 远程操作
 
@@ -169,12 +178,13 @@ $ git pull [remote] [branch] # 下载指定分支代码，并快速合并
 ```bash
 $ git branch # 查看工作区下的分支，并显示当前分支
 $ git branch -a # 显示所有本地分支和远程分支
+$ git branch -r # 显示远程分支
 $ git branch -v # 显示分支的检验和以及上次提交注释信息
 $ git branch <branchName> # 创建新的本地分支
 $ git branch -d <branchName> # 删除本地分支
 ```
 
-`git checkout`命令用于切换分支，切换分支体现在.git/HEAD文件中的指向；
+`git checkout`命令用于切换分支，切换分支体现在 .git/HEAD 文件中的指向；
 
 ```bash
 $ git checkout # 显示工作区、暂存区和远程仓库之间的差异
@@ -193,9 +203,9 @@ $ git reset HEAD . # 从暂存区中取消所有暂存文件
 $ git reset <file> # 从暂存区取消指定暂存文件
 $ git reset -- <file> # 从暂存区取消指定暂存文件
 $ git reset --hard <hash> # 撤销回退到某次提交状态，并删除代码，慎用
-$ git reset --hard HEAD~1 # 撤销之前的几次提交，并删除代码，慎用
+$ git reset --hard HEAD~n # 撤销之前的几次提交，并删除代码，HEAD~1 等价于 HEAD^，慎用
 $ git reset --soft <hash> # 撤销回退到某次提交状态，不删除代码
-$ git reset --soft HEAD~1 # 撤销之前的几次提交，不删除代码
+$ git reset --soft HEAD~n # 撤销之前的几次提交，不删除代码
 ```
 
 `git rm`命令用于删除 Git 项目中的文件。
@@ -249,7 +259,7 @@ $ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
 ```bash
 $ git log # 查看提交历史，包括检验和、作者、日期、注释等信息；
 $ git log -p/--patch # 补丁格式显示，显示更改内容；
-$ git log [-2] # 指定显示最后提交记录的条数；
+$ git log -n # 指定显示最后提交记录的条数；
 $ git log --stat # 显示提交记录的同时，显示每次提交的简略统计信息；
 $ git log --pretty=oneline # 指定显示格式，参数有 online | short | full | fuller，默认 full；
 $ git log --abbrev-commit # 只显示检验和的前几位，一般7位
@@ -257,7 +267,15 @@ $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 $ git log --oneline --decorate --graph --all # 显示提交历史、各个分支的指向以及项目的分支分叉情况
 ```
 
+`git reflog`命令用于显示所有本地操作的历史记录。可用于恢复因误操作被删除的分支。
+
+```bash
+$ git reflog # 显示从仓库创建之后的所有操作
+$ git reflog -n # 指定显示的条数
+```
+
 `git show`命令用于显示提交、分支、标签等详细信息。
+
 ```bash
 $ git show # 显示上一次提交记录
 $ git show  <hash | branch> # 显示该分支最后一次提交记录、作者、时间、文件差异等信息；
@@ -303,3 +321,5 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - [Github两种上传方式——SSH/https](https://blog.csdn.net/nbaDWde/article/details/80360836)
 - [Git 撤销commit文件 和 回退push的文件](https://www.jianshu.com/p/491a14d414f6)
 - [git使用情景2：commit之后，想撤销commit](https://blog.csdn.net/w958796636/article/details/53611133)
+- [git reflog 后悔药操作](https://blog.csdn.net/Della0930/article/details/89487914)
+- [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
