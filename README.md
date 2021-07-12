@@ -1,10 +1,10 @@
 # git-usage
 
 该项目用于记录 git 学习笔记，同时也用于测试 git 各种命令等。
-
+项目地址：(https://github.com/Coley48/git-usage)
 ### 关于版本控制
 
-> 版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 在本书所展示的例子中，我们对保存着软件源代码的文件作版本控制，但实际上，你可以对任何类型的文件进行版本控制。Git 是基于差异（delta-based）的版本控制工具。
+> 版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。通常，我们对保存着软件源代码的文件作版本控制，但实际上，你可以对任何类型的文件进行版本控制。Git 是基于差异（delta-based）的版本控制工具。
 > 在 Git中，每当你提交更新或保存项目状态时，它基本上就会对当时的全部文件创建一个快照并保存这个快照的索引。为了效率，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。Git 会为每个版本都创建一个快照。
 
 <!-- more -->
@@ -36,7 +36,7 @@ Git 文件状态变更:
 
 ![Git 文件状态变更](./image/git文件状态变更.png)
 
-### Git 安装
+### Git 下载安装
 
 Windows 上安装：
 
@@ -52,7 +52,7 @@ $ git --version # 输出当前 Git 版本信息
 git version 2.29.2.windows.2
 ```
 
-### Git 使用
+### Git 基本使用
 
 #### 配置信息
 
@@ -66,6 +66,7 @@ $ git config --list # 显示所有配置信息
 $ git config --list --show-origin # 显示配置信息及配置文件路径
 $ git config --global core.editor "path/to/editor" # 配置默认的编辑器
 $ git config --global core.editor notepad # 设置默认编辑器未notepad
+$ git config --global alias.last 'log -1 HEAD' # 为 Git 命令创建自定义别名
 ```
 
 #### 创建仓库
@@ -181,7 +182,10 @@ $ git branch -a # 显示所有本地分支和远程分支
 $ git branch -r # 显示远程分支
 $ git branch -v # 显示分支的检验和以及上次提交注释信息
 $ git branch <branchName> # 创建新的本地分支
-$ git branch -d <branchName> # 删除本地分支
+$ git branch -d <branchName> # 删除本地分支，未合并的分支会有错误提示
+$ git branch -D <branchName> # 强制删除本地分支
+$ git branch --merged # 显示已合并的分支
+$ git branch --no-merged # 显示未合并的分支
 ```
 
 `git checkout`命令用于切换分支，切换分支体现在 .git/HEAD 文件中的指向；
@@ -308,7 +312,6 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - 问号（?）只匹配一个任意字符；
 - 如果在方括号中使用短划线分隔两个字符，表示匹配这两个字符范围内的字符；
 - 使用两个星号（\*\*）表示匹配任意中间目录；
-
 
 ### 参考资料
 
