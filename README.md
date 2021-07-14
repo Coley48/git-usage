@@ -134,6 +134,15 @@ $ git cherry-pick --continue # 当移植过程中出现冲突时，需先解决�
 $ git cherry-pick --abort # 放弃移植操作，回到操作前的状态
 ```
 
+`git stash`命令用于保存和回复进度，方便中途切换分支。
+
+```bash
+$ git stash # 保存进度，将暂存区和工作区的改动保存起来
+$ git stash pop # 恢复最新的进度到工作区
+$ git stash drop # 丢弃最新的进度
+$ git stash clear # 丢弃所有保存的进度
+```
+
 #### 远程操作
 
 远程仓库是指托管在因特网或其他网络中的你的项目的版本库。
@@ -222,10 +231,11 @@ $ git rm -rf . # 强制移除项目中所有文件
 $ git rm -r --cached . # 删除本地缓存，有时更新.gitignore文件不会立即生效，可以执行该命令
 ```
 
-`git restore`命令用于丢弃更改。
+`git restore`命令用于丢弃更改，但无法丢弃暂存区中文件更改。
 
 ```bash
 $ git restore <file> # 忽略该文件的更改，退回到上次提交时的状态
+$ git restore . # 忽略所有文件的更改
 ```
 
 #### 标签管理
@@ -271,7 +281,7 @@ $ git log --oneline # --pretty=oneline 和 --abbrev-commit 组合的缩写
 $ git log --oneline --decorate --graph --all # 显示提交历史、各个分支的指向以及项目的分支分叉情况
 ```
 
-`git reflog`命令用于显示所有本地操作的历史记录。可用于恢复因误操作被删除的分支。
+`git reflog`命令用于显示所有本地操作的历史记录，可用于恢复因误操作被删除的分支。
 
 ```bash
 $ git reflog # 显示从仓库创建之后的所有操作
@@ -326,3 +336,4 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - [git使用情景2：commit之后，想撤销commit](https://blog.csdn.net/w958796636/article/details/53611133)
 - [git reflog 后悔药操作](https://blog.csdn.net/Della0930/article/details/89487914)
 - [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
+- [progit 当前进度](https://www.progit.cn/#_%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81)
