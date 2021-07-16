@@ -91,6 +91,7 @@ $ git clone https://github.com/User/Project.git # 使用http协议在当前文�
 $ git clone git@github.com:User/Project.git # 使用Git协议在当前文件夹下下载Project项目
 $ git clone https://github.com/User/Project.git newName # 下载Project项目到newName文件夹中，也可以跟路径，下载到指定位置
 $ git clone -b <branchName> https://github.com/User/Project.git # 下载项目指定分支，并且绑定获取和推送地址为该分支；
+$ git clone -o <remoteName> git@github.com:User/Project.git # 为远程分支设置名称
 # 下载链接后的 .git 可以不加；
 ```
 
@@ -124,6 +125,7 @@ $ git mv <fileA> <fileB> # 将文件 fileA 重命名为 fileB
 
 ```bash
 $ git merge <hash | branchName> # 合并某次提交或两个分支
+$ git merge --abort # 终止并退出合并
 ```
 
 `git cherry-pick`命令用于移植某些提交的变更。
@@ -259,6 +261,7 @@ $ git push origin --tags # 上传所有标签到远程仓库
 ```bash
 $ git status # 查看文件状态
 $ git status -s/--short # 查看文件状态的简略信息，其中文件名前会显示两列标志，左栏表示暂存区的状态，右栏表示工作区的状态，?表示未跟踪，A表示新增，M表示修改过
+$ git status -b/--branch # 显示分支信息
 ```
 
 `git diff`命令用于查看文件更改前后之间的差异。
@@ -336,4 +339,4 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - [git使用情景2：commit之后，想撤销commit](https://blog.csdn.net/w958796636/article/details/53611133)
 - [git reflog 后悔药操作](https://blog.csdn.net/Della0930/article/details/89487914)
 - [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
-- [progit 当前进度](https://www.progit.cn/#_%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81)
+- [progit 当前进度](https://www.progit.cn/#_remote_branches)
