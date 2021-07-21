@@ -90,7 +90,7 @@ $ git init # 在本地创建 Git 仓库，将尚未进行版本控制的本地�
 $ git clone https://github.com/User/Project.git # 使用http协议在当前文件夹下下载Project项目
 $ git clone git@github.com:User/Project.git # 使用Git协议在当前文件夹下下载Project项目
 $ git clone https://github.com/User/Project.git newName # 下载Project项目到newName文件夹中，也可以跟路径，下载到指定位置
-$ git clone -b <branchName> https://github.com/User/Project.git # 下载项目指定分支，并且绑定获取和推送地址为该分支；
+$ git clone -b [branch] https://github.com/User/Project.git # 下载项目指定分支，并且绑定获取和推送地址为该分支；
 $ git clone -o <remoteName> git@github.com:User/Project.git # 为远程分支设置名称
 # 下载链接后的 .git 可以不加；
 ```
@@ -100,7 +100,7 @@ $ git clone -o <remoteName> git@github.com:User/Project.git # 为远程分支设
 `git add`命令用于添加文件到缓冲区并跟踪文件，即监视文件变动。
 
 ```bash
-$ git add <file> # 添加跟踪文件到暂存区
+$ git add [file] # 添加跟踪文件到暂存区
 $ git add *.c # 添加所有.c文件
 $ git add . # 添加所有文件
 ```
@@ -118,20 +118,20 @@ $ git commit --amend # 重新提交，可以补充提交暂存区中的文件，
 `git mv`命令用于重命名已跟踪的文件。
 
 ```bash
-$ git mv <fileA> <fileB> # 将文件 fileA 重命名为 fileB
+$ git mv [fileA] [fileB] # 将文件 fileA 重命名为 fileB
 ```
 
 `git merge`命令用于合并分支，该命令会形成一次合并提交。
 
 ```bash
-$ git merge <hash | branchName> # 合并某次提交或两个分支
+$ git merge [hash | branch] # 合并某次提交或两个分支
 $ git merge --abort # 终止并退出合并
 ```
 
 `git cherry-pick`命令用于移植某些提交的变更。
 
 ```bash
-$ git cherry-pick <hash | branchName> # 将某次提交的变动转移到当前分支下
+$ git cherry-pick [hash | branch] # 将某次提交的变动转移到当前分支下
 $ git cherry-pick --continue # 当移植过程中出现冲突时，需先解决冲突，然后执行该命令完成移植
 $ git cherry-pick --abort # 放弃移植操作，回到操作前的状态
 ```
@@ -153,8 +153,8 @@ $ git stash clear # 丢弃所有保存的进度
 ```bash
 $ git remote # 用于显示远程配置信息，列出你指定的每一个远程服务器的简写，克隆仓库会显示origin，这是默认远程仓库的名称\
 $ git remote -v # 显示需要读写远程仓库使用的 Git 保存的简写与其对应的 URL。
-$ git remote add <remoteName> <url> # 添加一个新的远程 Git 仓库，同时指定一个方便使用的简写
-$ git remote show <remoteName> # 显示指定远程仓库的信息
+$ git remote add [remote] [url] # 添加一个新的远程 Git 仓库，同时指定一个方便使用的简写
+$ git remote show [remote] # 显示指定远程仓库的信息
 $ git remote set-url origin git@github.com:user/repo # 设置仓库上传地址，使用 git 协议，该设置存储在 .git/config 文件中
 $ git remote set-url origin https://github.com/user/repo # 设置仓库上传代码地址，使用 https 协议
 $ git remote add origin git@github.com:Coley48/webpack-code.git # 将本地仓库关联远程仓库
@@ -163,17 +163,17 @@ $ git remote add origin git@github.com:Coley48/webpack-code.git # 将本地仓�
 `git fetch`命令用于从远程仓库获取数据，该命令只会将数据下载到你的本地仓库——它并不会自动合并或修改你当前的工作，后续需要手动合并代码。
 
 ```bash
-$ git fetch <remote> # 抓取指定远程仓库的代码，省略则抓取默认的 origin 远程仓库
+$ git fetch [remote] # 抓取指定远程仓库的代码，省略则抓取默认的 origin 远程仓库
 ```
 
 `git push`命令用于将本地仓库的代码推送到远程仓库。需要有写入权限，并且本地代码已经更新到和远程仓库同步。
 
 ```bash
 $ git push [remote] [branch] # 将代码推送到指定远程仓库的指定分支下，一般默认 origin 下的 master/main 主分支；
-$ git push [remote] HEAD:<branch> # 使用该命令推送到指定的远程分支；
-$ git push --set-upstream origin <newBranch> # 将本地分支推送到远程服务器，并创建对应的分支 
-$ git push origin --delete <BranchName> # 删除远程分支
-$ git push origin <BranchName> --force # 强制推送到远程，覆盖之前的提交版本
+$ git push [remote] HEAD:[branch] # 使用该命令推送到指定的远程分支；
+$ git push --set-upstream origin [branch] # 将本地分支推送到远程服务器，并创建对应的分支 
+$ git push origin --delete [branch] # 删除远程分支
+$ git push origin [branch] --force # 强制推送到远程，覆盖之前的提交版本
 ```
 
 `git pull`操作用于从服务器拉取更新代码，并自动合并到本地。
@@ -192,20 +192,22 @@ $ git branch # 查看工作区下的分支，并显示当前分支
 $ git branch -a # 显示所有本地分支和远程分支
 $ git branch -r # 显示远程分支
 $ git branch -v # 显示分支的检验和以及上次提交注释信息
-$ git branch <branchName> # 创建新的本地分支
-$ git branch -d <branchName> # 删除本地分支，未合并的分支会有错误提示
-$ git branch -D <branchName> # 强制删除本地分支
+$ git branch [branch] # 创建新的本地分支
+$ git branch -d [branch] # 删除本地分支，未合并的分支会有错误提示
+$ git branch -D [branch] # 强制删除本地分支
 $ git branch --merged # 显示已合并的分支
 $ git branch --no-merged # 显示未合并的分支
 ```
 
-`git checkout`命令用于切换分支，切换分支体现在 .git/HEAD 文件中的指向；
+`git checkout`命令用于切换分支，切换分支体现在 .git/HEAD 文件中的指向；当从一个远程跟踪分支检出一个本地分支会自动创建一个叫做 “跟踪分支”，跟踪分支是与远程分支有直接关系的本地分支。
 
 ```bash
 $ git checkout # 显示工作区、暂存区和远程仓库之间的差异
-$ git checkout [branchName | hashValue] # 切换到分支，可以切换到本地没有的分支，可以是历史提交的版本，或者远程分支，进入分离头模式（detached HEAD），在分离头模式中也可以创建新的分支；
-$ git checkout -b <branchName> # 创建并切换分支
-$ git checkout --orphan <branch-name> # 创建单独分支
+$ git checkout [branch | hash] # 切换到分支，可以切换到本地没有的分支，可以是历史提交的版本，或者远程分支，进入分离头模式（detached HEAD），在分离头模式中也可以创建新的分支；
+$ git checkout -b [branch] # 创建并切换分支
+$ git checkout -b [branch] [remote]/[branch] # 创建并跟踪本地分支
+$ git checkout --track [remote]/[branch] # 创建并跟踪分支快捷方式
+$ git checkout --orphan [branch] # 创建单独分支
 ```
 
 #### 撤销删除
@@ -213,10 +215,10 @@ $ git checkout --orphan <branch-name> # 创建单独分支
 `git reset`用于撤销操作。
 
 ```bash
-$ git reset HEAD <file> # 从暂存区取消指定暂存文件
+$ git reset HEAD [file] # 从暂存区取消指定暂存文件
 $ git reset HEAD . # 从暂存区中取消所有暂存文件
-$ git reset <file> # 从暂存区取消指定暂存文件
-$ git reset -- <file> # 从暂存区取消指定暂存文件
+$ git reset [file] # 从暂存区取消指定暂存文件
+$ git reset -- [file] # 从暂存区取消指定暂存文件
 $ git reset --hard <hash> # 撤销回退到某次提交状态，并删除代码，慎用
 $ git reset --hard HEAD~n # 撤销之前的几次提交，并删除代码，HEAD~1 等价于 HEAD^，慎用
 $ git reset --soft <hash> # 撤销回退到某次提交状态，不删除代码
@@ -226,9 +228,9 @@ $ git reset --soft HEAD~n # 撤销之前的几次提交，不删除代码
 `git rm`命令用于删除 Git 项目中的文件。
 
 ```bash
-$ git rm <file> # 从暂存区中删除文件，同时永久删除文件，不能删除未提交到仓库中的文件
-$ git rm --cached <file> # 只从缓冲区中删除文件，取消跟踪
-$ git rm -f <file> # 强制删除文件，包括未提交到仓库中的文件
+$ git rm [file] # 从暂存区中删除文件，同时永久删除文件，不能删除未提交到仓库中的文件
+$ git rm --cached [file] # 只从缓冲区中删除文件，取消跟踪
+$ git rm -f [file] # 强制删除文件，包括未提交到仓库中的文件
 $ git rm -rf . # 强制移除项目中所有文件
 $ git rm -r --cached . # 删除本地缓存，有时更新.gitignore文件不会立即生效，可以执行该命令
 ```
@@ -236,7 +238,7 @@ $ git rm -r --cached . # 删除本地缓存，有时更新.gitignore文件不会
 `git restore`命令用于丢弃更改，但无法丢弃暂存区中文件更改。
 
 ```bash
-$ git restore <file> # 忽略该文件的更改，退回到上次提交时的状态
+$ git restore [file] # 忽略该文件的更改，退回到上次提交时的状态
 $ git restore . # 忽略所有文件的更改
 ```
 
@@ -246,11 +248,11 @@ $ git restore . # 忽略所有文件的更改
 
 ```bash
 $ git tag # 显示标签，以字母顺序列出
-$ git tag <tagname> # 添加轻量标签；
-$ git tag <tagname> <hash> # 通过提交检验和加标签； 
-$ git tag -a <tagname> # 添加附注标签，并使用编辑器添加描述信息
-$ git tag -a <tagname> -m "comments" # 添加附注标签同时添加描述信息
-$ git push origin <taganme> # 上传标签到远程仓库
+$ git tag [tag] # 添加轻量标签；
+$ git tag [tag] [hash] # 通过提交检验和加标签； 
+$ git tag -a [tag] # 添加附注标签，并使用编辑器添加描述信息
+$ git tag -a [tag] -m "comments" # 添加附注标签同时添加描述信息
+$ git push origin [tag] # 上传标签到远程仓库
 $ git push origin --tags # 上传所有标签到远程仓库
 ```
 
@@ -267,7 +269,7 @@ $ git status -b/--branch # 显示分支信息
 `git diff`命令用于查看文件更改前后之间的差异。
 
 ```bash
-$ git diff <file> # 比较工作目录中当前文件和暂存区域快照之间的差异；
+$ git diff [file] # 比较工作目录中当前文件和暂存区域快照之间的差异；
 $ git diff --staged # 比对已暂存文件与最后一次提交的文件差异;
 ```
 
@@ -295,8 +297,8 @@ $ git reflog -n # 指定显示的条数
 
 ```bash
 $ git show # 显示上一次提交记录
-$ git show  <hash | branch> # 显示该分支最后一次提交记录、作者、时间、文件差异等信息；
-$ git show <tag> # 显示标签信息和提交信息；
+$ git show  [hash | branch] # 显示该分支最后一次提交记录、作者、时间、文件差异等信息；
+$ git show [tag] # 显示标签信息和提交信息；
 ```
 
 `git help`命令可以查看 Git 指令的描述，以及详细用法；打开的是本地的英文文档网页文件，通常位于 Git 安装目录下的`Git/mingw64/share/doc/git-doc/`
