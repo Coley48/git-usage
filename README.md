@@ -121,13 +121,6 @@ $ git commit --amend # 重新提交，可以补充提交暂存区中的文件，
 $ git mv [fileA] [fileB] # 将文件 fileA 重命名为 fileB
 ```
 
-`git merge`命令用于合并分支，该命令会形成一次合并提交。
-
-```bash
-$ git merge [hash | branch] # 合并某次提交或两个分支
-$ git merge --abort # 终止并退出合并
-```
-
 `git cherry-pick`命令用于移植某些提交的变更。
 
 ```bash
@@ -192,11 +185,13 @@ $ git branch # 查看工作区下的分支，并显示当前分支
 $ git branch -a # 显示所有本地分支和远程分支
 $ git branch -r # 显示远程分支
 $ git branch -v # 显示分支的检验和以及上次提交注释信息
+$ git branch -vv # 显示分支当前提交的信息以及跟踪的远程分支
 $ git branch [branch] # 创建新的本地分支
 $ git branch -d [branch] # 删除本地分支，未合并的分支会有错误提示
 $ git branch -D [branch] # 强制删除本地分支
 $ git branch --merged # 显示已合并的分支
 $ git branch --no-merged # 显示未合并的分支
+$ git branch --set-upstream-to=[remote/branch] [branch] # 跟踪远程分支
 ```
 
 `git checkout`命令用于切换分支，切换分支体现在 .git/HEAD 文件中的指向；当从一个远程跟踪分支检出一个本地分支会自动创建一个叫做 “跟踪分支”，跟踪分支是与远程分支有直接关系的本地分支。
@@ -208,6 +203,19 @@ $ git checkout -b [branch] # 创建并切换分支
 $ git checkout -b [branch] [remote]/[branch] # 创建并跟踪本地分支
 $ git checkout --track [remote]/[branch] # 创建并跟踪分支快捷方式
 $ git checkout --orphan [branch] # 创建单独分支
+```
+
+`git merge`命令用于合并分支，该命令会形成一次合并提交。
+
+```bash
+$ git merge [hash | branch] # 合并某次提交或两个分支
+$ git merge --abort # 终止并退出合并
+```
+
+`git rebase`命令用于分支变基，将提交到某一分支上的所有修改都移至另一分支上，然后切换到另一分支进行快速合并，实现的效果和 merge 相同效果；
+
+```bash
+$ git rebase [branch] # 将当前分支转接到目标分支后
 ```
 
 #### 撤销删除
@@ -341,4 +349,5 @@ $ git <action> --help # 在指令后添加 --help 选项效果同 git help
 - [git使用情景2：commit之后，想撤销commit](https://blog.csdn.net/w958796636/article/details/53611133)
 - [git reflog 后悔药操作](https://blog.csdn.net/Della0930/article/details/89487914)
 - [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
+- [git本地分支和远程分支如何关联](https://blog.csdn.net/u012216131/article/details/84256384)
 - [progit 当前进度](https://www.progit.cn/#_remote_branches)
