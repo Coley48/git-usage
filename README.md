@@ -91,7 +91,8 @@ $ git clone https://github.com/User/Project.git # 使用http协议在当前文�
 $ git clone git@github.com:User/Project.git # 使用Git协议在当前文件夹下下载Project项目
 $ git clone https://github.com/User/Project.git newName # 下载Project项目到newName文件夹中，也可以跟路径，下载到指定位置
 $ git clone -b [branch] https://github.com/User/Project.git # 下载项目指定分支，并且绑定获取和推送地址为该分支；
-$ git clone -o <remoteName> git@github.com:User/Project.git # 为远程分支设置名称
+$ git clone -o [remoteName] git@github.com:User/Project.git # 为远程分支设置名称
+$ git clone --deepth -n [url] # 创建 n 层的浅拷贝
 # 下载链接后的 .git 可以不加；
 ```
 
@@ -227,9 +228,9 @@ $ git reset HEAD [file] # 从暂存区取消指定暂存文件
 $ git reset HEAD . # 从暂存区中取消所有暂存文件
 $ git reset [file] # 从暂存区取消指定暂存文件
 $ git reset -- [file] # 从暂存区取消指定暂存文件
-$ git reset --hard <hash> # 撤销回退到某次提交状态，并删除代码，慎用
+$ git reset --hard [hash] # 撤销回退到某次提交状态，并删除代码，慎用
 $ git reset --hard HEAD~n # 撤销之前的几次提交，并删除代码，HEAD~1 等价于 HEAD^，慎用
-$ git reset --soft <hash> # 撤销回退到某次提交状态，不删除代码
+$ git reset --soft [hash] # 撤销回退到某次提交状态，不删除代码
 $ git reset --soft HEAD~n # 撤销之前的几次提交，不删除代码
 ```
 
@@ -312,8 +313,8 @@ $ git show [tag] # 显示标签信息和提交信息；
 `git help`命令可以查看 Git 指令的描述，以及详细用法；打开的是本地的英文文档网页文件，通常位于 Git 安装目录下的`Git/mingw64/share/doc/git-doc/`
 
 ```bash
-$ git help <action> # 用浏览器打开该命令的详细说明页面
-$ git <action> --help # 在指令后添加 --help 选项效果同 git help
+$ git help [command] # 用浏览器打开该命令的详细说明页面
+$ git [command] --help # 在指令后添加 --help 选项效果同 git help
 ```
 
 #### 忽略文件
