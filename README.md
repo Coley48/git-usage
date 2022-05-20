@@ -204,6 +204,7 @@ $ git checkout -b [branch] # 创建并切换分支
 $ git checkout -b [branch] [remote]/[branch] # 创建并跟踪本地分支
 $ git checkout --track [remote]/[branch] # 创建并跟踪分支快捷方式
 $ git checkout --orphan [branch] # 创建单独分支
+$ git checkout - # 切换上一个分支
 ```
 
 `git merge`命令用于合并分支，该命令会形成一次合并提交。
