@@ -193,6 +193,7 @@ $ git branch -D [branch] # 强制删除本地分支
 $ git branch --merged # 显示已合并的分支
 $ git branch --no-merged # 显示未合并的分支
 $ git branch --set-upstream-to=[remote/branch] [branch] # 跟踪远程分支
+$ git branch --sort=[-]committerdate # 根据提交时间先后（升降序）显示分支
 ```
 
 `git checkout`命令用于切换分支，切换分支体现在 .git/HEAD 文件中的指向；当从一个远程跟踪分支检出一个本地分支会自动创建一个叫做 “跟踪分支”，跟踪分支是与远程分支有直接关系的本地分支。
